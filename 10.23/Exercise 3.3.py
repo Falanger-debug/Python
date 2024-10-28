@@ -1,0 +1,1 @@
+print(" ".join(str(i) for i in range(31) if i % 3 != 0))
