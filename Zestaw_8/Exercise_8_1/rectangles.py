@@ -26,9 +26,6 @@ class Rectangle:
     def __ne__(self, other):
         return not self == other
 
-    def center(self):
-        return Point((self.pt1.x + self.pt2.x) / 2, (self.pt1.y + self.pt2.y) / 2)
-
     def area(self):
         return abs((self.pt1.x - self.pt2.x) * (self.pt1.y - self.pt2.y))
 
@@ -49,5 +46,52 @@ class Rectangle:
         y = (y1 + y2) / 2
         return Rectangle(x1, y1, x, y), Rectangle(x, y1, x2, y), Rectangle(x1, y, x, y2), Rectangle(x, y, x2, y2)
 
-    def from_points(self, ):
-        pass
+    @classmethod
+    def from_points(cls, pts):
+        if len(pts) != 2:
+            raise ValueError("You must pass exactly 2 points")
+        return cls(pts[0].x, pts[0].y, pts[1].x, pts[1].y)
+
+    @property
+    def top(self):
+        return self.pt2.y
+
+    @property
+    def left(self):
+        return self.pt1.x
+
+    @property
+    def bottom(self):
+        return self.pt1.y
+
+    @property
+    def right(self):
+        return self.pt2.x
+    
+    @property
+    def width(self):
+        return self.pt2.x - self.pt1.x
+
+    @property
+    def height(self):
+        return self.pt2.y - self.pt1.y
+
+    @property
+    def top_left(self):
+        return Point(self.pt1.x, self.pt2.y)
+
+    @property
+    def bottom_left(self):
+        return Point(self.pt1.x, self.pt1.y)
+
+    @property
+    def top_right(self):
+        return Point(self.pt2.x, self.pt2.y)
+
+    @property
+    def bottom_right(self):
+        return Point(self.pt2.x, self.pt1.y)
+
+    @property
+    def center(self):
+        return Point((self.pt1.x + self.pt2.x) / 2, (self.pt1.y + self.pt2.y) / 2)
