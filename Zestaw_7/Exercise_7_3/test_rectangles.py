@@ -19,6 +19,12 @@ class MyTestCase(unittest.TestCase):
             Rectangle(1, 2, "a", 4)
             Rectangle(1, 2, 3, "a")
 
+        with self.assertRaises(ValueError):
+            Rectangle(3, 4, 1, 2)
+            Rectangle(1, 4, 3, 2)
+            Rectangle(1, 2, 3, 1)
+            Rectangle(1, 2, 3, 2)
+
     def test_str(self):
         self.assertEqual(str(Rectangle(1, 2, 3, 4)), "[(1, 2), (3, 4)]")
         self.assertEqual(str(Rectangle(1.5, 2.5, 3.5, 4.5)), "[(1.5, 2.5), (3.5, 4.5)]")
@@ -46,6 +52,18 @@ class MyTestCase(unittest.TestCase):
     def test_move(self):
         self.assertEqual(Rectangle(1, 2, 3, 4).move(1, 1), Rectangle(2, 3, 4, 5))
         self.assertEqual(Rectangle(1.5, 2.5, 3.5, 4.5).move(1, 1), Rectangle(2.5, 3.5, 4.5, 5.5))
+
+    def test_intersection(self):
+        self.assertEqual(Rectangle(1, 2, 3, 4).intersection(Rectangle(2, 3, 4, 5)), Rectangle(2, 3, 3, 4))
+        self.assertEqual(Rectangle(1.5, 2.5, 3.5, 4.5).intersection(Rectangle(2.5, 3.5, 4.5, 5.5)), Rectangle(2.5, 3.5, 3.5, 4.5))
+
+    def test_cover(self):
+        self.assertEqual(Rectangle(1, 2, 3, 4).cover(Rectangle(2, 3, 4, 5)), Rectangle(1, 2, 4, 5))
+        self.assertEqual(Rectangle(1.5, 2.5, 3.5, 4.5).cover(Rectangle(2.5, 3.5, 4.5, 5.5)), Rectangle(1.5, 2.5, 4.5, 5.5))
+
+    def test_make4(self):
+        self.assertEqual(Rectangle(1, 2, 3, 4).make4(), (Rectangle(1, 2, 2, 3), Rectangle(2, 2, 3, 3), Rectangle(1, 3, 2, 4), Rectangle(2, 3, 3, 4)))
+        self.assertEqual(Rectangle(1.5, 2.5, 3.5, 4.5).make4(), (Rectangle(1.5, 2.5, 2.5, 3.5), Rectangle(2.5, 2.5, 3.5, 3.5), Rectangle(1.5, 3.5, 2.5, 4.5), Rectangle(2.5, 3.5, 3.5, 4.5)))
 
 
 if __name__ == '__main__':
