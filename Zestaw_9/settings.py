@@ -1,9 +1,0 @@
-SCREEN_WIDTH = 600
-SCREEN_HEIGHT = 800
-FPS = 60
-WHITE = (255, 255, 255)
-LIGHT_BLUE = (173, 216, 230)
-BLACK = (0, 0, 0)
-snowflake_speed = 5
-snowflake_size = 30
-SPAWN_TEMPO = 30
