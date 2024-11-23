@@ -1,11 +1,9 @@
-FULLSCREEN = True
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 800
 FPS = 60
 WHITE = (255, 255, 255)
-BLUE = (0, 0, 255)
+LIGHT_BLUE = (173, 216, 230)
 BLACK = (0, 0, 0)
-snowflakes = []
 snowflake_speed = 5
 snowflake_size = 30
-snowflake_spawn_rate = 30
+SPAWN_TEMPO = 30
