@@ -6,7 +6,7 @@ SCREEN_HEIGHT = 800
 FPS = 60
 WHITE = (255, 255, 255)
 LIGHT_BLUE = (173, 216, 230)
-SPAWN_TEMPO = 5
+SPAWN_CONDITION = 15 # 1 in 15 chance of spawning a snowflake
 
 pygame.init()
 
@@ -16,20 +16,20 @@ pygame.display.set_caption("Children playing, having fun")
 snowflakes = []
 gathered_snow = []
 
-wind_blow = 0.5
+wind_blow = 0.5 # wind speed at the start
 
 class Snowflake:
     def __init__(self):
         self.x = random.randint(0, SCREEN_WIDTH)
         self.y = 0
-        self.size = random.randint(15, 30)
+        self.size = random.randint(5, 15)
         self.speed = random.uniform(1, 3)
         self.wind = random.uniform(-1.0, 1.0)
         self.isFalling = True
         self.melting = False
         self.melting_rate = random.uniform(0.1, 0.3)
 
-    def fall(self, wind_blow):
+    def fall(self):
         if self.isFalling:
             self.y += self.speed
             self.x += self.wind * wind_blow
@@ -67,7 +67,7 @@ def spawn_snowflakes():
 
 def draw_snowflakes():
     for snowflake in snowflakes[:]:
-        snowflake.fall(wind_blow)
+        snowflake.fall()
         snowflake.draw()
 
 def check_click():
@@ -99,7 +99,7 @@ def all_around_me():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 check_click()
 
-        if random.randint(1, SPAWN_TEMPO) == 1:
+        if random.randint(1, SPAWN_CONDITION) == 1:
             spawn_snowflakes()
 
         wind_blow = random.uniform(0.5, 1.5)
